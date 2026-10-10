@@ -8,8 +8,9 @@
 .headerMain p { max-width: 650px; color: #898c91; font-size: 11px; line-height: 1.5; }
 .headerActions { display: flex; align-items: center; gap: 7px; padding-bottom: 2px; }
 .copilotButton, .iconButton, .primaryButton, .secondaryButton, .textButton, .subtleButton { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line-strong); border-radius: 5px; cursor: pointer; transition: background .15s ease, border-color .15s ease; }
-.copilotButton { min-height: 34px; padding: 0 11px; color: #e8f3ff; background: #1a2937; border-color: #2e4a65; font-size: 11px; }
-.copilotButton:hover { background: #20364a; }
+.copilotButton { position: relative; overflow: hidden; min-height: 34px; padding: 0 11px 2px; color: #e8f3ff; background: #1a1b1d; border-color: #37393d; font-size: 11px; }
+.copilotButton::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, #f0b33b 0%, #ec7045 38%, #d34b98 68%, #8753e9 100%); content: ""; }
+.copilotButton:hover { background: #242629; }
 .iconButton { position: relative; width: 34px; height: 34px; color: #b3b6bb; background: #191a1c; }
 .iconButton:hover { color: #fff; background: #24262a; }
 .unreadDot { position: absolute; top: 7px; right: 7px; width: 6px; height: 6px; background: var(--accent-red); border: 1px solid #191a1c; border-radius: 50%; }

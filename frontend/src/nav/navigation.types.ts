@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Activity, Bot, BriefcaseBusiness, ClipboardCheck, FileClock, LayoutDashboard, LifeBuoy, Settings2 } from "lucide-react";
+import { Activity, Bot, ClipboardCheck, FileClock, Headset, LayoutDashboard, Settings2, UserRound } from "lucide-react";
 
 export type NavigationPath = "/dashboard" | "/intelligence" | "/automation" | "/copilot" | "/evidence" | "/marketplace" | "/help" | "/settings";
 
@@ -16,8 +16,8 @@ export const navigationItems: NavigationItem[] = [
   { label: "Policy-to-Process Automation", path: "/automation", icon: ClipboardCheck, group: "Workspace" },
   { label: "Autonomous Compliance Copilot", path: "/copilot", icon: Bot, group: "Workspace" },
   { label: "Audit-Ready Evidence", path: "/evidence", icon: FileClock, group: "Workspace" },
-  { label: "Consulting & Marketplace", path: "/marketplace", icon: BriefcaseBusiness, group: "Workspace" },
-  { label: "Help and Support", path: "/help", icon: LifeBuoy, group: "Support" },
+  { label: "Consulting & Marketplace", path: "/marketplace", icon: UserRound, group: "Workspace" },
+  { label: "Help and Support", path: "/help", icon: Headset, group: "Support" },
   { label: "Settings", path: "/settings", icon: Settings2, group: "Support" },
 ];
 

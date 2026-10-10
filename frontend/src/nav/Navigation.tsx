@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from "react";
 import { NavLink } from "react-router-dom";
-import { ChevronDown, ChevronLeft, Search, ShieldCheck } from "lucide-react";
+import { ChevronDown, ChevronLeft, Search } from "lucide-react";
+import logo from "../assets/logo.png";
 import { navigationItems } from "./navigation.types";
 import styles from "./Navigation.module.css";
 
@@ -17,7 +18,7 @@ export function Navigation() {
       <button className={styles.mobileToggle} type="button" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>{mobileOpen ? "Close" : "Menu"}</button>
       <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""} ${mobileOpen ? styles.mobileOpen : ""}`} aria-label="Main navigation">
         <div className={styles.brandRow}>
-          <div className={styles.brandMark}><ShieldCheck size={22} strokeWidth={1.7} /></div>
+          <div className={styles.brandMark}><img src={logo} alt="" /></div>
           {!collapsed && <div className={styles.brandText}><strong>Finsentis</strong><span>Operating System</span></div>}
           <button className={styles.collapseButton} type="button" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} onClick={() => setCollapsed((value) => !value)}><ChevronLeft size={16} /></button>
         </div>

@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import { Bell, Bot, ChevronRight, CircleHelp, Settings2, Send } from "lucide-react";
+import { Bell, Bot, ChevronRight, CircleHelp, Settings2, Send, WandSparkles } from "lucide-react";
 import type { DashboardConfiguration } from "../types/dashboard.types";
 import { Dialog } from "./Dialog";
 import styles from "./dashboardComponents.module.css";
@@ -30,7 +30,7 @@ export function Header({ configuration }: HeaderProps) {
       <div className={styles.headerMain}>
         <div><span className={styles.pageEyebrow}>OVERVIEW</span><h1>{configuration.title}</h1><p>{configuration.description}</p></div>
         <div className={styles.headerActions}>
-          <button type="button" className={styles.copilotButton} onClick={() => setPanel("copilot")}><Bot size={16} />Ask Copilot</button>
+          <button type="button" className={styles.copilotButton} onClick={() => setPanel("copilot")}><WandSparkles size={16} />Ask Copilot</button>
           <div className={styles.notificationWrap}>
             <button type="button" className={styles.iconButton} aria-label="Notifications" aria-expanded={notificationsOpen} onClick={() => setNotificationsOpen((open) => !open)}><Bell size={17} />{unread > 0 && <span className={styles.unreadDot} />}</button>
             {notificationsOpen && <div className={styles.notificationMenu} role="menu"><div className={styles.menuHeading}>Notifications <button type="button" onClick={() => { setUnread(0); setNotificationsOpen(false); }}>Mark all read</button></div><button type="button" className={styles.notificationItem} onClick={() => setNotificationsOpen(false)}><span className={styles.menuDot} /><span><strong>Filing deadline passed</strong><small>Singapore · 2 hours ago</small></span></button><button type="button" className={styles.notificationItem} onClick={() => setNotificationsOpen(false)}><span className={styles.menuDot} /><span><strong>New regulation detected</strong><small>EU AI Act · 5 hours ago</small></span></button><button type="button" className={styles.notificationItem} onClick={() => setNotificationsOpen(false)}><span className={styles.menuDot} /><span><strong>Workflow ready for review</strong><small>Policy attestation · Yesterday</small></span></button></div>}
