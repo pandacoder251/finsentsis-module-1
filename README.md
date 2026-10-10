@@ -18,7 +18,18 @@
 
 1. Breadcrumb
 2. Ask Copilot button
-3. Notification, Settings & Help icons
+3. Notification
+4. Settings
+5. Help icons
+
+
+### Navigation
+1. Global Dashboard & Risk Radar
+2. AI Regulatory Intelligence Layer
+3. Policy-to-Process Automation
+4. Autonomous Compliance Copilot
+5. Audit-Ready Evidence & Blockchain Trail
+6. Consulting & Expert Marketplace 
 
 ### Quick Action Drawer
 
@@ -26,6 +37,7 @@
 2. Create Workflow
 3. Add Entity / Employee
 4. Run AI Compliance Scan
+5. Run AI Compliance Scan
 
 ### Statistics Cards
 
