@@ -36,9 +36,15 @@ export function RiskHeatmap({ countries }: RiskHeatmapProps) {
 
   return (
     <section className={`${styles.panel} ${styles.mapPanel} ${fullscreen ? styles.mapFullscreen : ""}`} aria-labelledby="risk-map-title">
-      <div className={styles.sectionHeader}><div><span className={styles.panelEyebrow}>JURISDICTION MONITORING</span><h2 id="risk-map-title">Global risk heatmap</h2></div><span className={styles.mapLive}><i />Live coverage</span></div>
-      <div className={styles.mapToolbar}><span>Risk by jurisdiction</span><div className={styles.mapControls}><button type="button" aria-label="Zoom in" title="Zoom in" disabled={zoom >= 4} onClick={() => setZoom((value) => Math.min(4, value + 0.5))}><Plus size={15} /></button><button type="button" aria-label="Zoom out" title="Zoom out" disabled={zoom <= 1} onClick={() => setZoom((value) => Math.max(1, value - 0.5))}><Minus size={15} /></button><span className={styles.zoomValue}>{Math.round(zoom * 100)}%</span><button type="button" aria-label="Reset map view" title="Reset view" onClick={resetView}><RotateCcw size={14} /></button><button type="button" aria-label={fullscreen ? "Exit fullscreen" : "View fullscreen"} title={fullscreen ? "Exit fullscreen" : "View fullscreen"} onClick={() => void toggleFullscreen()}>{fullscreen ? <X size={15} /> : <Maximize2 size={14} />}</button></div></div>
+      <div className={styles.sectionHeader}><h2 id="risk-map-title">Global Risk Heatmap</h2><button type="button" className={styles.mapHeaderAction} aria-label="Reset map view" title="Reset map view" onClick={resetView}><RotateCcw size={14} /></button></div>
       <div className={styles.mapCanvas} ref={mapContainer}>
+        <div className={styles.mapControls} aria-label="Map controls">
+          <button type="button" aria-label="Reset map view" title="Reset view" onClick={resetView}><RotateCcw size={15} /></button>
+          <button type="button" aria-label="Zoom in" title="Zoom in" disabled={zoom >= 4} onClick={() => setZoom((value) => Math.min(4, value + 0.5))}><Plus size={17} /></button>
+          <button type="button" aria-label="Zoom out" title="Zoom out" disabled={zoom <= 1} onClick={() => setZoom((value) => Math.max(1, value - 0.5))}><Minus size={17} /></button>
+          <button type="button" aria-label={fullscreen ? "Exit fullscreen" : "View fullscreen"} title={fullscreen ? "Exit fullscreen" : "View fullscreen"} onClick={() => void toggleFullscreen()}>{fullscreen ? <X size={14} /> : <Maximize2 size={14} />}</button>
+          <span className={styles.zoomValue}>{Math.round(zoom * 100)}%</span>
+        </div>
         <ComposableMap projection="geoEqualEarth" projectionConfig={{ scale: 145 }} width={800} height={360} className={styles.worldMap}>
           <ZoomableGroup zoom={zoom} center={center} onMoveEnd={(position) => { setZoom(position.zoom ?? 1); if (position.coordinates) setCenter([position.coordinates[0], position.coordinates[1]]); }}>
             <Geographies geography={worldFeatures}>

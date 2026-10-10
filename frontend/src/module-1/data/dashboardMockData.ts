@@ -1,12 +1,12 @@
 import type { CountryRisk, StatCardData } from "../types/dashboard.types";
 
 export const dashboardStats: StatCardData[] = [
-  { id: "compliance-health", title: "Global Compliance Health", value: "87", description: "out of 100 · +5 vs last month", trend: 5, trendDirection: "up", status: "success", icon: "health", detail: "Health improved by 5 points this month. HR and legal controls are on track; finance is the main opportunity." },
-  { id: "risk-exposure", title: "Total Risk Exposure", value: "$12M", description: "estimated global exposure", trend: 8, trendDirection: "up", status: "warning", icon: "exposure", detail: "Estimated exposure across monitored jurisdictions. The largest concentration is in regulatory filings and data privacy." },
-  { id: "active-obligations", title: "Active Obligations", value: "1,247", description: "across 190+ countries", trend: 12, trendDirection: "up", status: "neutral", icon: "obligations", detail: "1,247 obligations are currently tracked, with 84 requiring review in the next 30 days." },
+  { id: "compliance-health", title: "Global Compliance Health", value: "87", description: "5% last month", trend: 5, trendDirection: "up", status: "success", icon: "health", detail: "Health improved by 5 points this month. HR and legal controls are on track; finance is the main opportunity." },
+  { id: "risk-exposure", title: "Total Risk Exposure", value: "$12M", description: "8.3% vs last month", trend: 8.3, trendDirection: "up", status: "warning", icon: "exposure", detail: "Estimated exposure across monitored jurisdictions. The largest concentration is in regulatory filings and data privacy." },
+  { id: "active-obligations", title: "Active Obligations", value: "1,247", description: "12% vs last month", trend: 12, trendDirection: "up", status: "neutral", icon: "obligations", detail: "1,247 obligations are currently tracked, with 84 requiring review in the next 30 days." },
   { id: "pending-tasks", title: "Pending Tasks", value: "318", description: "28 due this week", trend: 28, trendDirection: "up", status: "warning", icon: "tasks", detail: "318 tasks are open across active workflows. 28 are due this week and 6 are blocked." },
-  { id: "critical-alerts", title: "Critical Alerts", value: "23", description: "7 require immediate review", trend: 7, trendDirection: "up", status: "danger", icon: "alerts", detail: "23 critical alerts are open. The alert panel highlights the highest-priority items and due dates." },
-  { id: "countries-monitored", title: "Countries Monitored", value: "190+", description: "coverage across 6 regions", trend: 0, trendDirection: "neutral", status: "neutral", icon: "countries", detail: "Coverage spans more than 190 jurisdictions across the Americas, Europe, Africa, Asia-Pacific, and the Middle East." },
+  { id: "critical-alerts", title: "Critical Alerts", value: "23", description: "7 vs last month", trend: 7, trendDirection: "up", status: "danger", icon: "alerts", detail: "23 critical alerts are open. The alert panel highlights the highest-priority items and due dates." },
+  { id: "countries-monitored", title: "Countries Monitored", value: "190+", description: "No change", trend: 0, trendDirection: "neutral", status: "neutral", icon: "countries", detail: "Coverage spans more than 190 jurisdictions across the Americas, Europe, Africa, Asia-Pacific, and the Middle East." },
 ];
 
 export const countryRisks: CountryRisk[] = [

@@ -29,9 +29,10 @@ export function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
-      <Header configuration={dashboard.configuration} />
-      <div className={styles.body}>
+      <Header configuration={dashboard.configuration}>
         <QuickActions onCreateWorkflow={dashboard.addWorkflow} onCreateEntity={dashboard.addEntity} onNotify={notify} />
+      </Header>
+      <div className={styles.body}>
         {dashboard.error && <div className={styles.errorBanner} role="alert">{dashboard.error}</div>}
         <StatsGrid stats={dashboard.stats} loading={dashboard.loading} />
         <div className={styles.mapAlertsGrid}>

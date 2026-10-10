@@ -1,5 +1,5 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
-import { FileUp, ListPlus, ScanSearch, UserRoundPlus, Workflow } from "lucide-react";
+import { ArrowRight, FileUp, ListPlus, ScanSearch, UserRoundPlus, Workflow } from "lucide-react";
 import type { EntityRecord } from "../types/dashboard.types";
 import type { NewWorkflowInput } from "../types/workflow.types";
 import { Dialog } from "./Dialog";
@@ -16,6 +16,7 @@ const acceptedTypes = [".pdf", ".doc", ".docx", ".txt", ".png", ".jpg", ".jpeg"]
 
 export function QuickActions({ onCreateWorkflow, onCreateEntity, onNotify }: QuickActionsProps) {
   const fileInput = useRef<HTMLInputElement>(null);
+  const actionScroller = useRef<HTMLDivElement>(null);
   const [panel, setPanel] = useState<ActionPanel>(null);
   const [workflowName, setWorkflowName] = useState("");
   const [workflowDescription, setWorkflowDescription] = useState("");
@@ -61,18 +62,22 @@ export function QuickActions({ onCreateWorkflow, onCreateEntity, onNotify }: Qui
     setScanState("scanning");
     window.setTimeout(() => { setScanState("complete"); onNotify("Simulated compliance scan complete"); }, 1200);
   };
+  const revealNextAction = (): void => actionScroller.current?.scrollBy({ left: 180, behavior: "smooth" });
 
   return (
     <section className={styles.quickActions} aria-label="Quick actions">
-      <div className={styles.quickLabel}><span>QUICK ACTIONS</span><i /></div>
-      <div className={styles.actionButtons}>
-          <button type="button" className={styles.actionButton} onClick={() => fileInput.current?.click()}><span className={styles.actionIcon}><FileUp size={16} /></span><span>Upload document</span></button>
-          <input ref={fileInput} className={styles.hiddenInput} type="file" accept={acceptedTypes.join(",")} onChange={selectFile} aria-label="Upload a contract or document" />
-          <button type="button" className={styles.actionButton} onClick={() => setPanel("workflow")}><span className={styles.actionIcon}><Workflow size={16} /></span><span>Create workflow</span></button>
-          <button type="button" className={styles.actionButton} onClick={() => setPanel("entity")}><span className={styles.actionIcon}><UserRoundPlus size={16} /></span><span>Add entity / employee</span></button>
-          <button type="button" className={styles.actionButton} onClick={() => { setScanState("ready"); setPanel("scan"); }}><span className={styles.actionIcon}><ScanSearch size={16} /></span><span>Run compliance scan</span></button>
+      <span className={styles.quickLabel}>Quick Action Drawer</span>
+      <div className={styles.actionStrip}>
+        <div className={styles.actionButtons} ref={actionScroller}>
+          <button type="button" className={styles.actionButton} onClick={() => fileInput.current?.click()}><FileUp size={13} /><span>Upload Contract / Document</span></button>
+          <button type="button" className={styles.actionButton} onClick={() => setPanel("workflow")}><Workflow size={13} /><span>Create Workflow</span></button>
+          <button type="button" className={styles.actionButton} onClick={() => setPanel("entity")}><UserRoundPlus size={13} /><span>Add Entity / Employee</span></button>
+          <button type="button" className={styles.actionButton} onClick={() => { setScanState("ready"); setPanel("scan"); }}><ScanSearch size={13} /><span>Run AI Compliance Scan</span></button>
         </div>
-        {fileMessage && <p className={styles.fileMessage} role="status"><ListPlus size={14} />{fileMessage}</p>}
+        <button type="button" className={styles.actionNext} aria-label="Show more quick actions" onClick={revealNextAction}><ArrowRight size={15} /></button>
+        <input ref={fileInput} className={styles.hiddenInput} type="file" accept={acceptedTypes.join(",")} onChange={selectFile} aria-label="Upload a contract or document" />
+      </div>
+      {fileMessage && <p className={styles.fileMessage} role="status"><ListPlus size={14} />{fileMessage}</p>}
 
         {panel === "workflow" && <Dialog title="Create workflow" onClose={() => setPanel(null)}><form className={styles.form} onSubmit={createWorkflow}><label>Workflow name<input autoFocus required maxLength={80} value={workflowName} onChange={(event) => setWorkflowName(event.currentTarget.value)} placeholder="e.g. Annual policy review" /></label><label>Description<textarea rows={3} maxLength={240} value={workflowDescription} onChange={(event) => setWorkflowDescription(event.currentTarget.value)} placeholder="What needs to be completed?" /></label><label>Priority<select value={priority} onChange={(event) => setPriority(event.currentTarget.value as NewWorkflowInput["priority"])}><option>Low</option><option>Medium</option><option>High</option></select></label><div className={styles.dialogActions}><button type="button" className={styles.secondaryButton} onClick={() => setPanel(null)}>Cancel</button><button type="submit" className={styles.primaryButton} disabled={!workflowName.trim()}>Create workflow</button></div></form></Dialog>}
 
