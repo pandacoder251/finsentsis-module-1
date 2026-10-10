@@ -133,3 +133,71 @@
 ![module 1](<Asset/Frame 1045.png>)
 
 ---
+
+## Frontend Implementation
+
+The frontend is in `frontend/`. It uses React, Vite, strict TypeScript, React Router, CSS Modules, Recharts, and Lucide React. Dashboard records are illustrative mock data; no backend is connected.
+
+```text
+frontend/
+├── public/
+│   └── favicon.png
+└── src/
+	├── App.module.css
+	├── App.tsx
+	├── index.css
+	├── main.tsx
+	├── assets/
+	│   └── logo.png
+	├── layouts/
+	│   ├── DashboardLayout.module.css
+	│   └── DashboardLayout.tsx
+	├── nav/
+	│   ├── Navigation.module.css
+	│   ├── Navigation.tsx
+	│   └── navigation.types.ts
+	└── module-1/
+		├── components/
+		│   ├── AnalyticsSection.tsx
+		│   ├── ComplianceBreakdown.tsx
+		│   ├── CriticalAlerts.tsx
+		│   ├── Dialog.tsx
+		│   ├── Header.tsx
+		│   ├── PenaltyExposure.tsx
+		│   ├── QuickActions.tsx
+		│   ├── RiskDistribution.tsx
+		│   ├── RiskHeatmap.tsx
+		│   ├── StatCard.tsx
+		│   ├── StatsGrid.tsx
+		│   ├── WorkflowStatus.tsx
+		│   └── dashboardComponents.module.css
+		├── data/
+		│   ├── alertsMockData.ts
+		│   ├── analyticsMockData.ts
+		│   ├── dashboardMockData.ts
+		│   └── workflowMockData.ts
+		├── hooks/
+		│   └── useDashboardData.ts
+		├── pages/
+		│   ├── Dashboard.module.css
+		│   └── Dashboard.tsx
+		├── services/
+		│   └── dashboardService.ts
+		├── styles/
+		│   └── dashboardTokens.css
+		└── types/
+			├── alert.types.ts
+			├── analytics.types.ts
+			├── dashboard.types.ts
+			└── workflow.types.ts
+```
+
+## To Do
+
+- Replace the mock implementation in `frontend/src/module-1/services/dashboardService.ts` with API-backed dashboard retrieval and error handling.
+- Add backend persistence for workflows, entities, alert acknowledgements, and workflow status changes.
+- Connect document selection to a secure upload service with server-side validation and progress/error states.
+- Replace the simulated Copilot reply and compliance scan with approved AI services and clearly defined safety and review flows.
+- Add browser-driven tests for dashboard interactions, navigation, dialogs, map controls, charts, and mobile layouts.
+- Validate jurisdiction coverage, obligation counts, penalty estimates, and compliance scores with domain owners before using production data.
+- Replace placeholder destinations in the global navigation as the remaining product modules are implemented.
