@@ -1,0 +1,26 @@
+.sidebar { position: fixed; z-index: 20; inset: 0 auto 0 0; width: 264px; display: flex; flex-direction: column; gap: 22px; padding: 22px 15px 14px; color: var(--text-secondary); background: #0d0e10; border-right: 1px solid #292a2d; transition: width .2s ease, transform .2s ease; }
+.collapsed { width: 76px; align-items: center; padding-inline: 10px; }
+.brandRow { position: relative; display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 3px; }
+.brandMark { width: 42px; height: 42px; display: grid; place-items: center; color: #fff; background: #17191c; border: 1px solid #292b2f; border-radius: 8px; }
+.brandText { display: grid; gap: 1px; color: #f5f5f6; font-size: 14px; }
+.brandText span, .profile span { color: #85888d; font-size: 10px; }
+.collapseButton { margin-left: auto; width: 26px; height: 26px; display: grid; place-items: center; color: #a2a4a8; background: #191a1d; border: 1px solid #2c2d30; border-radius: 5px; cursor: pointer; }
+.collapsed .collapseButton { position: absolute; right: -19px; background: #17181a; }
+.searchBox { display: flex; align-items: center; gap: 9px; height: 44px; padding: 0 11px; color: #8e9196; background: #191a1d; border: 1px solid #2b2c30; border-radius: 7px; }
+.searchBox input { min-width: 0; flex: 1; color: #e7e8e9; background: transparent; border: 0; outline: 0; font: inherit; font-size: 12px; }
+.searchBox input::placeholder { color: #777a80; }
+.searchBox kbd { padding: 3px 7px; color: #aeb0b5; background: #24262a; border: 1px solid #33353a; border-radius: 4px; font-size: 11px; }
+.navGroup { display: grid; gap: 5px; }
+.groupTitle { display: flex; align-items: center; gap: 5px; margin: 2px 0 5px; color: #797c81; font-size: 11px; }
+.navLink { display: flex; align-items: center; gap: 11px; min-height: 42px; padding: 0 10px; color: #d5d6d9; text-decoration: none; border: 1px solid transparent; border-radius: 6px; font-size: 11px; line-height: 1.35; transition: background .15s ease, color .15s ease; }
+.navLink:hover { color: #fff; background: #191a1d; }
+.navLink.active { color: #fff; background: #1b1c20; border-color: #2e3035; box-shadow: inset 2px 0 #43a0ff; }
+.collapsed .navLink { width: 44px; justify-content: center; padding: 0; }
+.collapsed .navGroup { width: 100%; }
+.supportGroup { display: grid; gap: 5px; margin-top: auto; }
+.profile { display: flex; align-items: center; gap: 9px; min-height: 58px; margin-top: 8px; padding: 9px 4px 0; border-top: 1px solid #292a2d; }
+.profile > div:nth-child(2) { display: grid; gap: 2px; flex: 1; color: #e3e4e5; font-size: 11px; }
+.avatar { width: 35px; height: 35px; display: grid; place-items: center; color: #dff1ff; background: #284a5f; border: 1px solid #4a8c9a; border-radius: 50%; font-size: 10px; }
+.mobileToggle { display: none; }
+.scrim { display: none; }
+@media (max-width: 860px) { .sidebar { transform: translateX(-100%); } .sidebar.mobileOpen { transform: translateX(0); width: 264px; align-items: stretch; } .mobileToggle { position: fixed; z-index: 22; top: 12px; left: 12px; display: block; padding: 8px 11px; color: #f4f5f6; background: #1a1b1e; border: 1px solid #34363a; border-radius: 5px; font-size: 12px; } .scrim { position: fixed; z-index: 19; inset: 0; display: block; background: #0009; border: 0; } .sidebar .collapseButton { display: none; } }

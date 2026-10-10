@@ -1,0 +1,3 @@
+.shell { min-height: 100vh; color: var(--text-primary); background: var(--canvas); }
+.main { min-height: 100vh; margin-left: 264px; transition: margin-left .2s ease; }
+@media (max-width: 860px) { .main { margin-left: 0; padding-top: 52px; } }
