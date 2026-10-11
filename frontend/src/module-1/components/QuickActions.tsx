@@ -1,5 +1,5 @@
-import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
-import { ArrowRight, FileUp, ListPlus, ScanSearch, UserRoundPlus, Workflow } from "lucide-react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { ChevronLeft, ChevronRight, FileUp, ListPlus, ScanSearch, UserRoundPlus, Workflow } from "lucide-react";
 import type { EntityRecord } from "../types/dashboard.types";
 import type { NewWorkflowInput } from "../types/workflow.types";
 import { Dialog } from "./Dialog";
@@ -27,6 +27,21 @@ export function QuickActions({ onCreateWorkflow, onCreateEntity, onNotify }: Qui
   const [metadata, setMetadata] = useState("");
   const [scanState, setScanState] = useState<"ready" | "scanning" | "complete">("ready");
   const [fileMessage, setFileMessage] = useState("");
+  const [hasPreviousActions, setHasPreviousActions] = useState(false);
+  const [hasNextActions, setHasNextActions] = useState(false);
+
+  useEffect(() => {
+    const scroller = actionScroller.current;
+    if (!scroller) return;
+    const updateScrollState = (): void => {
+      setHasPreviousActions(scroller.scrollLeft > 0);
+      setHasNextActions(scroller.scrollLeft + scroller.clientWidth < scroller.scrollWidth - 1);
+    };
+    updateScrollState();
+    const resizeObserver = new ResizeObserver(updateScrollState);
+    resizeObserver.observe(scroller);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   const selectFile = (event: ChangeEvent<HTMLInputElement>): void => {
     const file = event.currentTarget.files?.[0];
@@ -62,7 +77,8 @@ export function QuickActions({ onCreateWorkflow, onCreateEntity, onNotify }: Qui
     setScanState("scanning");
     window.setTimeout(() => { setScanState("complete"); onNotify("Simulated compliance scan complete"); }, 1200);
   };
-  const revealNextAction = (): void => actionScroller.current?.scrollBy({ left: 180, behavior: "smooth" });
+  const revealNextAction = (): void => actionScroller.current?.scrollBy({ left: hasNextActions ? 180 : -180, behavior: "smooth" });
+  const ActionScrollIcon = hasNextActions ? ChevronRight : ChevronLeft;
 
   return (
     <section className={styles.quickActions} aria-label="Quick actions">
@@ -74,7 +90,7 @@ export function QuickActions({ onCreateWorkflow, onCreateEntity, onNotify }: Qui
           <button type="button" className={styles.actionButton} onClick={() => setPanel("entity")}><UserRoundPlus size={13} /><span>Add Entity / Employee</span></button>
           <button type="button" className={styles.actionButton} onClick={() => { setScanState("ready"); setPanel("scan"); }}><ScanSearch size={13} /><span>Run AI Compliance Scan</span></button>
         </div>
-        <button type="button" className={styles.actionNext} aria-label="Show more quick actions" onClick={revealNextAction}><ArrowRight size={15} /></button>
+        <button type="button" className={styles.actionNext} aria-label={hasNextActions ? "Show next quick actions" : "Show previous quick actions"} onClick={revealNextAction} disabled={!hasNextActions && !hasPreviousActions}><ActionScrollIcon size={17} /></button>
         <input ref={fileInput} className={styles.hiddenInput} type="file" accept={acceptedTypes.join(",")} onChange={selectFile} aria-label="Upload a contract or document" />
       </div>
       {fileMessage && <p className={styles.fileMessage} role="status"><ListPlus size={14} />{fileMessage}</p>}

@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from "react";
-import { ArrowRight, CalendarDays, Circle, CircleCheck, CircleDashed } from "lucide-react";
+import { ArrowRight, CalendarDays, Circle, CircleDashed } from "lucide-react";
 import type { WorkflowRecord, WorkflowStatus as WorkflowStatusType } from "../types/workflow.types";
 import { Dialog } from "./Dialog";
 import styles from "./dashboardComponents.module.css";
@@ -16,6 +16,9 @@ const formatDate = (date: string): string => new Intl.DateTimeFormat("en-US", { 
 
 export function WorkflowStatus({ workflows, onStatusChange, onNotify }: WorkflowStatusProps) {
   const [selected, setSelected] = useState<WorkflowRecord | null>(null);
+
+  const openDetails = (workflow: WorkflowRecord): void => setSelected(workflow);
+
   const changeStatus = (id: string, event: ChangeEvent<HTMLSelectElement>): void => {
     const status = event.currentTarget.value as WorkflowStatusType;
     onStatusChange(id, status);
@@ -32,8 +35,8 @@ export function WorkflowStatus({ workflows, onStatusChange, onNotify }: Workflow
   return (
     <section className={`${styles.panel} ${styles.workflowPanel}`} aria-labelledby="workflow-status-title">
       <div className={styles.sectionHeader}><div><span className={styles.panelEyebrow}>LIVE STATUS</span><h2 id="workflow-status-title">Workflow Live Status</h2></div><span className={styles.inlineMetric}>{workflows.filter((item) => item.status === "Completed").length}/{workflows.length}</span></div>
-      <div className={styles.workflowList}>{workflows.slice(0, 4).map((workflow) => <article className={styles.workflowItem} key={workflow.id}><div className={styles.workflowTitleRow}><span className={`${styles.workflowStatusDot} ${statusClass[workflow.status]}`}><Circle size={8} fill="currentColor" /></span><h3>{workflow.name}</h3><span className={`${styles.statusPill} ${statusClass[workflow.status]}`}>{workflow.status}</span></div><div className={styles.progressTrack} role="progressbar" aria-label={`${workflow.name} completion`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={workflow.completion}><span style={{ width: `${workflow.completion}%` }} /></div><div className={styles.workflowMeta}><span>{workflow.completion}% complete</span><span><CalendarDays size={12} />{formatDate(workflow.dueDate)}</span><button type="button" className={styles.textButton} onClick={() => setSelected(workflow)}>Details <ArrowRight size={12} /></button></div></article>)}{workflows.length === 0 && <div className={styles.emptyState}><CircleDashed size={17} />No workflows yet</div>}</div>
-      {selected && <Dialog title={selected.name} onClose={() => setSelected(null)}><div className={styles.workflowDetail}><span className={`${styles.statusPill} ${statusClass[selected.status]}`}>{selected.status}</span><div className={styles.detailGrid}><span>Owner<strong>{selected.owner}</strong></span><span>Due date<strong>{formatDate(selected.dueDate)}</strong></span><span>Priority<strong>{selected.priority}</strong></span><span>Completion<strong>{selected.completion}%</strong></span></div><label className={styles.workflowDetailSelect}>Update status<select aria-label="Update workflow status" value={selected.status} onChange={changeSelectedStatus}>{workflowStatuses.map((status) => <option key={status}>{status}</option>)}</select></label><p className={styles.finePrint}>Status changes are local to this preview and are not persisted to a server.</p><CircleCheck size={18} className={styles.workflowDetailIcon} /></div></Dialog>}
+      <div className={styles.workflowList}>{workflows.slice(0, 4).map((workflow) => <article className={styles.workflowItem} key={workflow.id}><div className={styles.workflowTitleRow}><span className={`${styles.workflowStatusDot} ${statusClass[workflow.status]}`}><Circle size={8} fill="currentColor" /></span><h3>{workflow.name}</h3><span className={`${styles.statusPill} ${statusClass[workflow.status]}`}>{workflow.status}</span></div><div className={styles.progressTrack} role="progressbar" aria-label={`${workflow.name} completion`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={workflow.completion}><span style={{ width: `${workflow.completion}%` }} /></div><div className={styles.workflowMeta}><span>{workflow.completion}% complete</span><span><CalendarDays size={12} />{formatDate(workflow.dueDate)}</span><button type="button" className={styles.textButton} onClick={() => openDetails(workflow)}>Details <ArrowRight size={12} /></button></div></article>)}{workflows.length === 0 && <div className={styles.emptyState}><CircleDashed size={17} />No workflows yet</div>}</div>
+      {selected && <Dialog title={selected.name} onClose={() => setSelected(null)}><div className={styles.workflowDetail}><span className={`${styles.statusPill} ${statusClass[selected.status]}`}>{selected.status}</span><div className={styles.detailGrid}><span>Owner<strong>{selected.owner}</strong></span><span>Due date<strong>{formatDate(selected.dueDate)}</strong></span><span>Priority<strong>{selected.priority}</strong></span><span>Completion<strong>{selected.completion}%</strong></span></div><label className={styles.workflowDetailSelect}>Update status<select aria-label="Update workflow status" value={selected.status} onChange={changeSelectedStatus}>{workflowStatuses.map((status) => <option key={status}>{status}</option>)}</select></label><p className={styles.finePrint}>Status changes are local to this preview and are not persisted to a server.</p></div></Dialog>}
     </section>
   );
 }

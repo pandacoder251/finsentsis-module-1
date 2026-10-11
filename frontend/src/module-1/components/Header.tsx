@@ -1,14 +1,14 @@
 import { useState, type FormEvent, type ChangeEvent, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Bell, Bot, ChevronRight, CircleHelp, Settings2, Send, WandSparkles } from "lucide-react";
+import { Bell, Bot, ChevronRight, CircleHelp, FileDown, Settings2, Send, WandSparkles } from "lucide-react";
 import type { DashboardConfiguration } from "../types/dashboard.types";
 import { Dialog } from "./Dialog";
 import styles from "./dashboardComponents.module.css";
 
 type HeaderPanel = "copilot" | "settings" | "help" | null;
-interface HeaderProps { configuration: DashboardConfiguration; children: ReactNode }
+interface HeaderProps { configuration: DashboardConfiguration; onGenerateReport: () => void; children: ReactNode }
 
-export function Header({ configuration, children }: HeaderProps) {
+export function Header({ configuration, onGenerateReport, children }: HeaderProps) {
   const [panel, setPanel] = useState<HeaderPanel>(null);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unread, setUnread] = useState(3);
@@ -29,6 +29,7 @@ export function Header({ configuration, children }: HeaderProps) {
       <div className={styles.headerTop}>
         <div className={styles.breadcrumbs}><Link to="/dashboard">Dashboard</Link><ChevronRight size={13} /><span>Global Dashboard &amp; Risk Radar</span></div>
         <div className={styles.headerActions}>
+          <button type="button" className={`${styles.secondaryButton} ${styles.reportButton}`} onClick={onGenerateReport} aria-label="Generate dashboard report" title="Download dashboard report as CSV"><FileDown size={15} /><span>Generate report</span></button>
           <button type="button" className={styles.copilotButton} onClick={() => setPanel("copilot")}><WandSparkles size={16} />Ask Copilot</button>
           <div className={styles.notificationWrap}>
             <button type="button" className={styles.iconButton} aria-label="Notifications" aria-expanded={notificationsOpen} onClick={() => setNotificationsOpen((open) => !open)}><Bell size={17} />{unread > 0 && <span className={styles.unreadDot} />}</button>

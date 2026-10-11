@@ -8,6 +8,7 @@
 .headerMain h1 { margin: 0 0 5px; color: var(--text-primary); font: 600 18px/1.25 "Manrope", sans-serif; }
 .headerMain p { max-width: 650px; color: #898c91; font-size: 11px; line-height: 1.5; }
 .headerActions { display: flex; align-items: center; gap: 7px; }
+.reportButton { min-height: 34px; gap: 6px; padding-inline: 9px; font-size: 9px; white-space: nowrap; }
 .copilotButton, .iconButton, .primaryButton, .secondaryButton, .textButton { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--line-strong); border-radius: 5px; cursor: pointer; transition: background .15s ease, border-color .15s ease; }
 .copilotButton { position: relative; overflow: hidden; min-height: 34px; padding: 0 11px 2px; color: #f0f4fa; background: linear-gradient(112deg, rgb(240 179 59 / 10%), rgb(211 75 152 / 9%) 58%, rgb(135 83 233 / 12%)), rgb(28 29 33 / 78%); border-color: rgb(220 224 234 / 24%); backdrop-filter: blur(12px) saturate(150%); box-shadow: inset 0 1px rgb(255 255 255 / 13%), 0 4px 12px rgb(0 0 0 / 20%); font-size: 11px; transition: background .18s ease, border-color .18s ease, box-shadow .18s ease; }
 .copilotButton::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, rgb(240 179 59 / 42%) 10%, #ec7045 34%, #d34b98 66%, rgb(135 83 233 / 48%) 90%, transparent 100%); filter: blur(1px) drop-shadow(0 0 5px rgb(211 75 152 / 28%)); opacity: .82; content: ""; }
@@ -35,6 +36,8 @@
 .actionButton > svg { color: #d7d9dc; }
 .actionNext { width: 29px; height: 30px; display: grid; flex: 0 0 29px; place-items: center; color: #c1c3c7; background: #17181a; border: 1px solid #2b2d31; border-radius: 4px; cursor: pointer; }
 .actionNext:hover { color: #fff; background: #25272a; }
+.actionNext:disabled { opacity: .45; cursor: default; }
+.actionNext:focus-visible, .reportButton:focus-visible { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
 .hiddenInput { display: none; }
 .fileMessage { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; color: #91d6bb; font-size: 10px; }
 .statsGrid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; }
@@ -92,8 +95,6 @@
 .alertInfo p { font-size: 8px; line-height: 1.35; }
 .alertMeta { gap: 8px; margin-top: 5px; font-size: 7px; }
 .mapPanel { min-height: 360px; display: flex; flex-direction: column; }
-.mapHeaderAction { width: 24px; height: 24px; display: grid; place-items: center; color: #a3a5a9; background: transparent; border: 0; border-radius: 4px; cursor: pointer; }
-.mapHeaderAction:hover { color: #fff; background: #25272a; }
 .mapLive { color: #80d3b3; background: #1c2d28; border-color: #2b473d; }
 .mapLive i, .dataSource i { background: #42c6a5; box-shadow: 0 0 8px #42c6a566; }
 .mapToolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 13px; padding: 7px 8px; color: #9a9da2; background: #131416; border: 1px solid #282a2d; border-radius: 5px; font-size: 9px; }
@@ -203,6 +204,8 @@
 .workflowMeta .textButton { margin-left: auto; font-size: 8px; }
 .statusSelectLabel { display: flex; align-items: center; gap: 6px; margin-top: 7px; color: #73767b; font-size: 8px; }
 .statusSelectLabel select { max-width: 115px; padding: 3px 5px; color: #bfc1c5; background: #202225; border: 1px solid #323438; border-radius: 3px; font-size: 8px; }
+.workflowDetailSelect { display: grid; gap: 7px; width: 100%; color: #aeb1b6; font-size: 10px; font-weight: 500; }
+.workflowDetailSelect select { width: 100%; min-height: 36px; padding: 0 10px; color: #e2e4e7; background: #191b1e; border: 1px solid #373a3f; border-radius: 5px; font: inherit; }
 .riskDistributionPanel { grid-column: 2; grid-row: 2; }
 .riskChartWrap { display: flex; align-items: center; gap: 12px; min-height: 196px; margin-top: 8px; }
 .donutChart { position: relative; width: 48%; min-width: 145px; max-width: 190px; aspect-ratio: 1; }
@@ -288,6 +291,8 @@
   .header { padding: 8px 12px 0 62px; }
   .headerTop { gap: 5px; }
   .headerActions { gap: 4px; }
+  .reportButton { width: 34px; padding: 0; }
+  .reportButton span { display: none; }
   .headerMain { margin-top: 10px; }
   .headerMain h1 { max-width: 100%; font-size: 17px; }
   .headerMain p { font-size: 10px; }

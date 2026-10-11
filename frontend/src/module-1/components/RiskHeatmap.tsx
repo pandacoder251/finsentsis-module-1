@@ -36,7 +36,7 @@ export function RiskHeatmap({ countries }: RiskHeatmapProps) {
 
   return (
     <section className={`${styles.panel} ${styles.mapPanel} ${fullscreen ? styles.mapFullscreen : ""}`} aria-labelledby="risk-map-title">
-      <div className={styles.sectionHeader}><h2 id="risk-map-title">Global Risk Heatmap</h2><button type="button" className={styles.mapHeaderAction} aria-label="Reset map view" title="Reset map view" onClick={resetView}><RotateCcw size={14} /></button></div>
+      <div className={styles.sectionHeader}><h2 id="risk-map-title">Global Risk Heatmap</h2></div>
       <div className={styles.mapCanvas} ref={mapContainer}>
         <div className={styles.mapControls} aria-label="Map controls">
           <button type="button" aria-label="Reset map view" title="Reset view" onClick={resetView}><RotateCcw size={15} /></button>
