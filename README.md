@@ -138,6 +138,10 @@
 
 The frontend is in `frontend/`. It uses React, Vite, strict TypeScript, React Router, CSS Modules, Recharts, and Lucide React. Dashboard records are illustrative mock data; no backend is connected.
 
+### Vercel Deployment
+
+The Vercel rewrite configuration serves the SPA entry point for client-side routes such as `/dashboard`. The repository-root configuration supports deployments rooted at the repository, and `frontend/vercel.json` supports deployments with `frontend/` configured as the Vercel project root.
+
 ```text
 frontend/
 ├── public/
