@@ -1,4 +1,4 @@
-.destination { max-width: 760px; padding: 48px 40px; }
+.destination { max-width: 760px; padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 40px); }
 .destination h1 { margin: 10px 0 12px; color: var(--text-primary); font-size: 30px; font-weight: 550; }
 .destination p { color: var(--text-muted); line-height: 1.6; }
 .eyebrow { color: var(--accent-blue); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; }

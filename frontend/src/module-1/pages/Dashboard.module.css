@@ -5,7 +5,7 @@
 .body {
     width: min(100%, 1660px);
     margin: 0 auto;
-    padding: 0 14px 20px;
+    padding: 0 clamp(12px, 2vw, 20px) 20px;
 }
 
 .mapAlertsGrid {
@@ -36,27 +36,12 @@
     font-size: 10px;
 }
 
-@media (max-width: 1150px) {
-    .mapAlertsGrid {
-        grid-template-columns: minmax(0, 1.9fr) minmax(245px, .95fr);
-    }
-}
-
 @media (max-width: 900px) {
-    .body {
-        padding-inline: 20px;
-    }
-
     .mapAlertsGrid {
         grid-template-columns: 1fr;
     }
 }
-
 @media (max-width: 600px) {
-    .body {
-        padding-inline: 12px;
-    }
-
     .dashboardFooter {
         flex-wrap: wrap;
     }
